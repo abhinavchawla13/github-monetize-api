@@ -11,7 +11,9 @@ exports.getGithubUserInfo = client => {
 
 exports.getGithubReposInfo = client => {
     ghme = client.me();
-    return ghme.reposAsync();
+    return ghme.reposAsync({
+        per_page: 100
+    });
 }
 
 exports.getGithubRepoInfo = (client, fullname) => {

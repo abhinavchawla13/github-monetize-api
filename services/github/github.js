@@ -23,10 +23,6 @@ exports.getGithubRepoInfo = (client, fullname) => {
 exports.getREADME = (client, fullname) => {
     ghrepo = client.repo(fullname);
     return ghrepo.readmeAsync();
-
-    return ghrepo.contentsAsync('README.md');
-
-    // return ghrepo.updateContentsAsync('README.md', commitMessage, contents, sha);
 }
 
 exports.addOrUpdateREADME = (client, fullname, commitMessage, contents, sha = '') => {

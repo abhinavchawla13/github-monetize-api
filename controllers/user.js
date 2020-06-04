@@ -36,8 +36,7 @@ async function login(req, res) {
       });
 
       return res.status(201).send({
-        _id: user._id,
-        firebaseUID: user.firebaseUID
+        user
       });
     }
     else {

@@ -18,62 +18,56 @@ let {
 module.exports = app => {
   app.use("/repos", route);
 
-  route.get('/:id', [
-    isAuthenticated,
-    getRepoInformation
-  ])
+  route.get("/:id", [isAuthenticated, getRepoInformation]);
 
-  route.get('/pointer/:id', [
-    getWalletPointer
-  ])
+  route.get("/pointer/:id/:branch", [getWalletPointer]);
 
-  route.get('/public/:id', [
-    getRepoPublicInfo
-  ])
+  route.get("/public/:id/:branch", [getRepoPublicInfo]);
 
-  route.post('/', [
+  route.post("/", [
     isAuthenticated,
     celebrate({
       body: Joi.object({
-        fullname: Joi.string().required(),
+        fullname: Joi.string().required()
       })
     }),
     connectRepo
-  ])
+  ]);
 
-  route.patch('/:id', [
+  route.patch("/:id", [
     isAuthenticated,
     celebrate({
       body: Joi.object({
-        markdown: Joi.string().required(),
+        markdown: Joi.string().allow(""),
+        branch: Joi.string().required(),
+        paymentPointerId: Joi.string().required()
       })
     }),
     updateMarkdown
-  ])
+  ]);
 
-  route.get('/', [
-    isAuthenticated,
-    getUserAllReposName
-  ])
+  route.get("/", [isAuthenticated, getUserAllReposName]);
 
-  route.post('/publish', [
+  route.post("/publish", [
     isAuthenticated,
     celebrate({
       body: Joi.object({
         id: Joi.string().required(),
+        branch: Joi.string().required(),
+        publishMarkdown: Joi.string().required(),
       })
     }),
     publishMarkdown
-  ])
+  ]);
 
-  route.post('/unpublish', [
+  route.post("/unpublish", [
     isAuthenticated,
     celebrate({
       body: Joi.object({
         id: Joi.string().required(),
+        branch: Joi.string().required()
       })
     }),
     unpublishLink
-  ])
-
+  ]);
 };

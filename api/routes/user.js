@@ -4,24 +4,47 @@ let { celebrate, Joi } = require("celebrate");
 let { isAuthenticated } = require("../../middlewares");
 const route = Router();
 
-let { getUserReposInformation, addWalletPointer } = require("../../controllers/user");
+let {
+  getUserInformation,
+  addWalletPointer,
+  removeWalletPointer,
+  updateWalletPointer,
+  getUserReposInformation
+} = require("../../controllers/user");
 
 module.exports = app => {
   app.use("/users", route);
 
-  route.get('/repos', [
-    isAuthenticated,
-    getUserReposInformation
-  ])
+  route.get("/", [isAuthenticated, getUserInformation]);
 
-  route.patch('/wallet', [
+  route.patch("/wallet/add", [
+    isAuthenticated,
+    celebrate({
+      body: Joi.object({
+        paymentPointer: Joi.string().required()
+      })
+    }),
+    addWalletPointer
+  ]);
+
+  route.patch("/wallet/remove", [
+    isAuthenticated,
+    celebrate({
+      body: Joi.object({
+        paymentPointerId: Joi.string().required()
+      })
+    }),
+    removeWalletPointer
+  ]);
+
+  route.patch("/wallet/update", [
     isAuthenticated,
     celebrate({
       body: Joi.object({
         paymentPointer: Joi.string().required(),
+        paymentPointerId: Joi.string().required()
       })
     }),
-    addWalletPointer
-  ])
-
+    updateWalletPointer
+  ]);
 };

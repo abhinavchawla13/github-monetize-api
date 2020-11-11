@@ -1,7 +1,6 @@
 let mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-
 const UserSchema = new mongoose.Schema(
   {
     email: {
@@ -10,7 +9,7 @@ const UserSchema = new mongoose.Schema(
       unique: true
     },
     photoURL: {
-      type: String,
+      type: String
     },
     firebaseUID: {
       type: String,
@@ -27,13 +26,16 @@ const UserSchema = new mongoose.Schema(
       required: [true, "GitHub Token not provided"],
       select: false
     },
-    paymentPointer: {
-      type: String
-    },
+    paymentPointers: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Pointer"
+      }
+    ],
     repos: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Repo',
+        ref: "Repo"
       }
     ]
   },

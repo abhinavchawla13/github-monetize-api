@@ -2,7 +2,8 @@
 
 
 
-# github-monetize-api
+# GitHub: Monetize Documentation - Backend
+### UI code is available at: [https://github.com/abhinavchawla13/github-monetize-ui](https://github.com/abhinavchawla13/github-monetize-ui)
 #### Backend server for BeTheHope hosted at [https://github-monetize.herokuapp.com/](https://github-monetize.herokuapp.com/)
 #### API Documentation published on [Postman](https://documenter.getpostman.com/view/1085264/SztG46GP)
 ---
